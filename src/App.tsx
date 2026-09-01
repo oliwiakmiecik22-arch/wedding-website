@@ -6,13 +6,13 @@ import { PillButton } from './components/PillButton'
 import { RSVPSection } from './components/RSVPForm'
 import beskid from './assets/beskid.png'
 import bouquet from './assets/bouquet.png'
-import celebration from './assets/celebration.png'
-import church from './assets/church.png'
+import celebration from './assets/celebration-retina.png'
+import church from './assets/church-retina.png'
 import coupleWalking from './assets/couple-walking.png'
 import introPhoto from './assets/intro-photo.png'
 import monogram from './assets/monogram.png'
-import polaroidCouple from './assets/polaroid-couple.png'
-import polaroidRings from './assets/polaroid-rings.png'
+import polaroidCouple from './assets/polaroid-couple-retina.png'
+import polaroidRings from './assets/polaroid-rings-retina.png'
 import { wedding } from './config/wedding'
 
 function App() {
@@ -53,8 +53,8 @@ function App() {
               className="invitation__polaroid"
               src={polaroidRings}
               alt="Kasia and Jake holding their wedding rings"
-              width="540"
-              height="658"
+              width="1080"
+              height="1316"
             />
             <div className="invitation__copy">
               <h2 className="script-title" id="invitation-title">You’re invited!</h2>
@@ -86,13 +86,13 @@ function App() {
           <h2 className="script-title" id="venue-title">The Venue</h2>
           <div className="venue__grid">
             <article className="venue-card">
-              <img src={church} alt="The wooden church in Jurków" width="508" height="619" loading="lazy" />
+              <img src={church} alt="The wooden church in Jurków" width="1016" height="1238" loading="lazy" />
               <h3 className="script-title">Ceremony</h3>
               <p>The ceremony will take place at 3:00 pm at the Church of Our Lady of Perpetual Help in Jurków, Poland.</p>
               <PillButton href={wedding.ceremony.mapUrl} target="_blank" rel="noreferrer">See details</PillButton>
             </article>
             <article className="venue-card">
-              <img src={celebration} alt="The celebration venue in Słopnice" width="508" height="619" loading="lazy" />
+              <img src={celebration} alt="The celebration venue in Słopnice" width="1016" height="1238" loading="lazy" />
               <h3 className="script-title">Celebration</h3>
               <p>The party will take place at Szałas Beskida in Słopnice, Poland, with plenty of food, drinks and dancing until 5:00 am.</p>
               <PillButton href={wedding.celebration.mapUrl} target="_blank" rel="noreferrer">See details</PillButton>
@@ -106,7 +106,24 @@ function App() {
             <h2 className="script-title" id="other-title">Other details</h2>
             <OtherDetails />
           </div>
-          <img className="other__polaroid" src={polaroidCouple} alt="Kasia and Jake together" width="571" height="628" loading="lazy" />
+          <img
+            className="other__polaroid other__polaroid--desktop"
+            src={polaroidCouple}
+            alt="Kasia and Jake together"
+            width="1142"
+            height="1256"
+            loading="lazy"
+          />
+        </section>
+
+        <section className="other-polaroid-mobile" aria-label="Wedding photo">
+          <img
+            src={polaroidCouple}
+            alt="Kasia and Jake together"
+            width="1142"
+            height="1256"
+            loading="lazy"
+          />
         </section>
 
         <section className="closing-message">

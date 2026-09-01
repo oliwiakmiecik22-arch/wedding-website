@@ -28,10 +28,14 @@
 }
 
 html {
+  width: 100%;
+  max-width: 100%;
   scroll-behavior: smooth;
 }
 
 body {
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   min-width: 320px;
   overflow-x: clip;
@@ -63,6 +67,8 @@ textarea:focus-visible {
 img {
   display: block;
   max-width: 100%;
+  height: auto;
+  image-rendering: auto;
 }
 
 h1,
@@ -1649,7 +1655,66 @@ figure {
   }
 }
 
-@media (max-width: 700px) {
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Tablet: the accordion can grow, so this section must not depend on a
+     fixed aspect-ratio or absolutely positioned content. */
+  .other {
+    display: flex;
+    min-height: 0;
+    aspect-ratio: auto;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 100px 32px 100px;
+    isolation: isolate;
+  }
+
+  .other__background {
+    z-index: 0;
+    object-position: center center;
+  }
+
+  .other__content {
+    position: relative;
+    z-index: 2;
+    inset: auto;
+    width: min(100%, 720px);
+    margin: 0 auto;
+  }
+
+  .other__content > h2 {
+    position: static;
+    width: auto;
+    margin: 0 0 58px;
+    font-size: 76px;
+    line-height: 1;
+  }
+
+  .accordion {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin: 0 auto;
+    transform: none;
+  }
+
+  .other__polaroid {
+    position: relative;
+    z-index: 3;
+    right: auto;
+    bottom: auto;
+    width: min(46vw, 360px);
+    margin: 68px auto 0;
+    transform: rotate(-3deg);
+  }
+
+  .closing-message {
+    min-height: 520px;
+    padding-top: 110px;
+  }
+}
+
+@media (max-width: 767px) {
   body {
     font-size: 16px;
   }
@@ -1755,6 +1820,11 @@ figure {
     width: min(96vw, 550px);
   }
 
+  .pill-button.rsvp-envelope-button {
+    min-height: 38px;
+    height: 8.5%;
+  }
+
   .venue {
     min-height: auto;
     padding: 90px 0 110px;
@@ -1782,36 +1852,56 @@ figure {
     font-size: 18px;
   }
 
+  /* Mobile: keep Other Details in normal document flow so opened accordion
+     content and the polaroid always contribute to the section height. */
   .other {
+    display: flex;
     min-height: 0;
-    aspect-ratio: 1600 / 1718;
+    aspect-ratio: auto;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 78px 14px 86px;
+    isolation: isolate;
+  }
+
+  .other::after {
+    background: linear-gradient(180deg, rgba(244, 244, 243, 0.9) 0%, rgba(244, 244, 243, 0.54) 16%, rgba(244, 244, 243, 0.08) 42%, transparent 62%);
   }
 
   .other__background {
+    z-index: 0;
     object-position: 51% center;
   }
 
   .other__content {
-    width: calc(100vw - 28px);
-    padding-top: 0;
+    position: relative;
+    z-index: 2;
+    inset: auto;
+    width: min(100%, 460px);
+    margin: 0 auto;
   }
 
   .other__content > h2 {
-    top: 7.5%;
-    margin-bottom: 0;
-    font-size: 54px;
-    line-height: 1;
+    position: static;
+    width: auto;
+    margin: 0 0 42px;
+    font-size: clamp(52px, 15vw, 68px);
+    line-height: 0.98;
   }
 
   .accordion {
-    top: 23%;
-    width: min(calc(100vw - 28px), 420px);
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin: 0 auto;
+    transform: none;
   }
 
   .accordion__item button {
     min-height: 60px;
-    padding: 12px 16px;
-    font-size: 20px;
+    padding: 13px 16px;
+    font-size: clamp(17px, 5vw, 20px);
   }
 
   .accordion__panel {
@@ -1820,20 +1910,24 @@ figure {
 
   .accordion__panel p {
     padding: 2px 16px 18px;
-    font-size: 17px;
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.55;
   }
 
   .other__polaroid {
-    right: 4%;
-    bottom: -7%;
-    width: min(70vw, 260px);
+    position: relative;
+    z-index: 3;
+    right: auto;
+    bottom: auto;
+    width: min(68vw, 270px);
     height: auto;
+    margin: 52px auto 0;
+    transform: none;
   }
 
   .closing-message {
-    min-height: 460px;
-    padding: 150px 20px 80px;
+    min-height: 390px;
+    padding: 88px 20px 82px;
   }
 
   .closing-message p {
@@ -1960,9 +2054,190 @@ figure {
   }
 }
 
+@media (max-width: 480px) {
+  .intro__content {
+    width: calc(100% - 28px);
+    padding-block: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-bottom));
+  }
+
+  .intro__eyebrow {
+    font-size: clamp(15px, 4.5vw, 18px);
+  }
+
+  .intro__names {
+    margin-bottom: clamp(16px, 3.2vh, 24px);
+    font-size: clamp(42px, 13vw, 60px);
+  }
+
+  .envelope-button {
+    width: min(calc(100vw - 32px), 500px);
+  }
+
+  .envelope-monogram {
+    width: clamp(128px, 40vw, 180px);
+  }
+
+  .envelope-card {
+    font-size: clamp(12px, 3.7vw, 17px);
+  }
+
+  .envelope-card img {
+    width: clamp(48px, 16vw, 70px);
+    margin-bottom: 0.35rem;
+  }
+
+  .intro__instruction {
+    margin-top: 0.85rem;
+    font-size: 15px;
+  }
+
+  .hero {
+    min-height: 68svh;
+  }
+
+  .hero__content h1 {
+    right: 16px;
+    left: 16px;
+    font-size: clamp(28px, 9vw, 36px);
+  }
+
+  .hero__content p {
+    right: 16px;
+    left: 16px;
+    font-size: clamp(18px, 5.8vw, 23px);
+  }
+
+  .invitation {
+    padding: 66px 0 74px;
+  }
+
+  .invitation__inner,
+  .venue__grid {
+    width: calc(100% - 40px);
+  }
+
+  .invitation__inner {
+    gap: 40px;
+  }
+
+  .invitation__copy h2 {
+    font-size: clamp(56px, 17vw, 66px);
+  }
+
+  .invitation__copy p {
+    font-size: 18px;
+  }
+
+  .countdown-section {
+    min-height: 320px;
+  }
+
+  .countdown {
+    width: calc(100% - 16px);
+  }
+
+  .countdown__values {
+    gap: clamp(2px, 1vw, 5px);
+  }
+
+  .countdown__number {
+    font-size: clamp(32px, 10.4vw, 46px);
+  }
+
+  .countdown__separator {
+    font-size: clamp(28px, 8.8vw, 40px);
+  }
+
+  .countdown__label {
+    font-size: clamp(10px, 3.1vw, 14px);
+  }
+
+  .rsvp-section {
+    min-height: 500px;
+    padding-block: 52px;
+  }
+
+  .rsvp-envelope-wrap {
+    width: min(calc(100vw - 16px), 520px);
+  }
+
+  .pill-button.rsvp-envelope-button {
+    min-height: 38px;
+    height: 8.5%;
+  }
+
+  .venue {
+    padding: 76px 0 92px;
+  }
+
+  .venue > h2 {
+    margin-bottom: 48px;
+    font-size: 62px;
+  }
+
+  .venue__grid {
+    gap: 68px;
+  }
+
+  .venue-card h3 {
+    font-size: 48px;
+  }
+
+  .other {
+    padding: 70px 14px 78px;
+  }
+
+  .other__content > h2 {
+    margin-bottom: 36px;
+  }
+
+  .other__polaroid {
+    width: min(70vw, 250px);
+    margin-top: 46px;
+  }
+
+  .closing-message {
+    min-height: 350px;
+    padding: 76px 20px;
+  }
+
+  .closing-message p {
+    font-size: clamp(48px, 16vw, 64px);
+  }
+
+  .rsvp-dialog__header {
+    padding-inline: 16px;
+  }
+
+  .rsvp-dialog__brand > img {
+    width: 46px;
+  }
+
+  .rsvp-dialog__header h2 {
+    font-size: 48px;
+  }
+
+  .rsvp-form__body,
+  .rsvp-form__footer {
+    padding-inline: 16px;
+  }
+}
+
 @media (max-height: 700px) {
   .intro__content {
-    transform: scale(0.84);
+    padding-block: 10px;
+  }
+
+  .intro__names {
+    margin-bottom: 14px;
+  }
+
+  .envelope-button {
+    width: min(72vh, 82vw, 500px);
+  }
+
+  .intro__instruction {
+    margin-top: 0.7rem;
   }
 }
 
@@ -1978,5 +2253,518 @@ figure {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+/* ============================================================
+   MOBILE IMAGE + LAYOUT QA OVERRIDES (v2)
+   These rules intentionally live last so older responsive rules
+   cannot re-stretch or reposition the photos on phones/tablets.
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  /* Never let intrinsic width/height attributes or older aspect-ratio
+     declarations force a stretched box. */
+  .invitation__polaroid,
+  .venue-card > img,
+  .other__polaroid {
+    display: block;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  /* Invitation photo: compact, natural Polaroid proportions. */
+  .invitation__polaroid {
+    width: min(72vw, 300px) !important;
+    max-width: 300px !important;
+    justify-self: center;
+    margin-inline: auto;
+  }
+
+  /* Venue: photos no longer fill almost the whole phone screen.
+     The high-resolution assets are rendered at a sensible CSS size. */
+  .venue__grid {
+    width: min(calc(100% - 40px), 430px);
+    margin-inline: auto;
+  }
+
+  .venue-card {
+    width: 100%;
+    align-items: center;
+  }
+
+  .venue-card > img {
+    width: min(82vw, 320px) !important;
+    max-width: 320px !important;
+    margin-inline: auto;
+  }
+
+  /* Other details: content and photo stay in normal flow. */
+  .other {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 0;
+    height: auto;
+    aspect-ratio: auto;
+  }
+
+  .other__content {
+    position: relative;
+    inset: auto;
+    width: min(100%, 460px);
+    margin-inline: auto;
+    align-self: center;
+  }
+
+  .other__polaroid {
+    position: static !important;
+    width: min(68vw, 270px) !important;
+    max-width: 270px !important;
+    margin: 42px auto 0 !important;
+    transform: none !important;
+    align-self: center;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    top: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .invitation__inner,
+  .venue__grid {
+    width: calc(100% - 40px);
+  }
+
+  .invitation__polaroid {
+    width: min(74vw, 280px) !important;
+    max-width: 280px !important;
+  }
+
+  .venue-card > img {
+    width: min(80vw, 300px) !important;
+    max-width: 300px !important;
+  }
+
+  .other__polaroid {
+    width: min(68vw, 250px) !important;
+    max-width: 250px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .invitation__polaroid {
+    width: min(76vw, 260px) !important;
+    max-width: 260px !important;
+  }
+
+  .venue-card > img {
+    width: min(80vw, 280px) !important;
+    max-width: 280px !important;
+  }
+
+  .other__polaroid {
+    width: min(68vw, 235px) !important;
+    max-width: 235px !important;
+  }
+}
+
+/* ============================================================
+   MOBILE OTHER DETAILS — STRUCTURAL FIX v3
+   ============================================================ */
+
+.other-polaroid-mobile {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --mobile-page-gutter: 20px;
+  }
+
+  .other {
+    display: block !important;
+    width: 100%;
+    min-width: 0;
+    min-height: 0 !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+    overflow: hidden;
+    padding: 72px var(--mobile-page-gutter) 64px !important;
+    box-sizing: border-box;
+  }
+
+  .other__content {
+    position: relative !important;
+    z-index: 2;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: 460px;
+    min-width: 0;
+    margin: 0 auto !important;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .other__content > h2 {
+    position: static !important;
+    width: 100%;
+    margin: 0 0 36px !important;
+    text-align: center;
+  }
+
+  .accordion {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 !important;
+    box-sizing: border-box;
+    transform: none !important;
+  }
+
+  .accordion__item,
+  .accordion__item h3,
+  .accordion__item button,
+  .accordion__panel,
+  .accordion__panel-inner {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .accordion__item button {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .accordion__panel p {
+    width: 100%;
+    max-width: 100%;
+    padding-right: 18px;
+    padding-left: 18px;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+  }
+
+  .other__polaroid--desktop {
+    display: none !important;
+  }
+
+  .other-polaroid-mobile {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 46px var(--mobile-page-gutter) 70px;
+    background: var(--page);
+    box-sizing: border-box;
+  }
+
+  .other-polaroid-mobile > img {
+    display: block;
+    width: min(72vw, 270px);
+    max-width: 100%;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 auto;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+    object-position: center;
+    transform: none !important;
+  }
+
+  .closing-message {
+    padding-top: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  .other {
+    padding-top: 64px !important;
+    padding-bottom: 56px !important;
+  }
+
+  .other-polaroid-mobile {
+    padding-top: 40px;
+    padding-bottom: 62px;
+  }
+
+  .other-polaroid-mobile > img {
+    width: min(70vw, 250px);
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --mobile-page-gutter: 18px;
+  }
+
+  .other-polaroid-mobile > img {
+    width: min(72vw, 235px);
+  }
+}
+
+/* ============================================================
+   FINAL MOBILE CENTERING + EQUAL GUTTERS v4
+   One shared horizontal rhythm for the whole mobile experience.
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  :root {
+    --mobile-page-gutter: clamp(26px, 7vw, 34px);
+    --mobile-content-max: 460px;
+  }
+
+  html,
+  body,
+  #root,
+  main {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* HERO — equal side inset for all overlay copy */
+  .hero__content {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero__content h1,
+  .hero__content p {
+    right: var(--mobile-page-gutter) !important;
+    left: var(--mobile-page-gutter) !important;
+    width: auto !important;
+    max-width: none;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .hero__monogram {
+    right: 50% !important;
+    left: auto !important;
+    transform: translateX(50%);
+  }
+
+  /* INVITATION — one centered column with exactly equal gutters */
+  .invitation {
+    width: 100%;
+    padding-right: var(--mobile-page-gutter) !important;
+    padding-left: var(--mobile-page-gutter) !important;
+  }
+
+  .invitation__inner {
+    width: 100% !important;
+    max-width: var(--mobile-content-max) !important;
+    min-width: 0;
+    margin-inline: auto !important;
+    justify-items: center;
+  }
+
+  .invitation__polaroid {
+    justify-self: center !important;
+    margin-inline: auto !important;
+  }
+
+  .invitation__copy {
+    width: 100%;
+    max-width: 420px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .invitation__copy p,
+  .invitation__copy h2 {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+  }
+
+  /* COUNTDOWN — same visual inset as the rest of the page */
+  .countdown {
+    width: min(calc(100% - (2 * var(--mobile-page-gutter))), var(--mobile-content-max)) !important;
+    max-width: var(--mobile-content-max);
+    margin-inline: auto !important;
+  }
+
+  /* RSVP — centered and kept inside the same mobile grid */
+  .rsvp-section {
+    width: 100%;
+    padding-right: var(--mobile-page-gutter) !important;
+    padding-left: var(--mobile-page-gutter) !important;
+  }
+
+  .rsvp-envelope-wrap {
+    width: 100% !important;
+    max-width: 520px;
+    margin-inline: auto !important;
+  }
+
+  /* VENUE — centered cards and identical left/right gutters */
+  .venue {
+    width: 100%;
+    padding-right: var(--mobile-page-gutter) !important;
+    padding-left: var(--mobile-page-gutter) !important;
+    text-align: center;
+  }
+
+  .venue > h2 {
+    width: 100%;
+    max-width: var(--mobile-content-max);
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+  }
+
+  .venue__grid {
+    width: 100% !important;
+    max-width: var(--mobile-content-max) !important;
+    margin-inline: auto !important;
+    justify-items: center;
+  }
+
+  .venue-card {
+    width: 100%;
+    max-width: var(--mobile-content-max);
+    min-width: 0;
+    margin-inline: auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .venue-card > img,
+  .venue-card h3,
+  .venue-card p,
+  .venue-card .pill-button {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .venue-card p {
+    width: 100%;
+    max-width: 390px;
+    text-align: center;
+  }
+
+  /* OTHER DETAILS — same gutter as every other mobile section */
+  .other {
+    width: 100%;
+    padding-right: var(--mobile-page-gutter) !important;
+    padding-left: var(--mobile-page-gutter) !important;
+  }
+
+  .other__content {
+    width: 100% !important;
+    max-width: var(--mobile-content-max) !important;
+    margin-inline: auto !important;
+  }
+
+  .other__content > h2 {
+    width: 100%;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    text-align: center;
+  }
+
+  .accordion {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: auto !important;
+  }
+
+  .accordion__item,
+  .accordion__item button,
+  .accordion__panel,
+  .accordion__panel-inner,
+  .accordion__panel p {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .accordion__item button {
+    width: 100%;
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+  }
+
+  .accordion__panel p {
+    width: 100%;
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+  }
+
+  /* POLAROID — separate white block, perfectly centered */
+  .other-polaroid-mobile {
+    width: 100%;
+    padding-right: var(--mobile-page-gutter) !important;
+    padding-left: var(--mobile-page-gutter) !important;
+    justify-content: center !important;
+    background: var(--page);
+  }
+
+  .other-polaroid-mobile > img {
+    display: block;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    align-self: center;
+    transform: none !important;
+  }
+
+  /* FINAL MESSAGE — same balanced inset */
+  .closing-message {
+    width: 100%;
+    padding-right: var(--mobile-page-gutter) !important;
+    padding-left: var(--mobile-page-gutter) !important;
+    text-align: center;
+  }
+
+  .closing-message p {
+    width: 100%;
+    max-width: 520px;
+    margin-inline: auto;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --mobile-page-gutter: clamp(26px, 7.2vw, 30px);
+  }
+
+  .invitation__inner,
+  .venue__grid,
+  .other__content {
+    width: 100% !important;
+  }
+
+  .venue-card > img {
+    width: min(100%, 290px) !important;
+  }
+
+  .other-polaroid-mobile > img {
+    width: min(72vw, 250px) !important;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --mobile-page-gutter: 24px;
   }
 }
