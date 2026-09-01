@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Countdown } from './components/Countdown'
 import { OpeningEnvelope } from './components/OpeningEnvelope'
 import { OtherDetails } from './components/OtherDetails'
+import { PillButton } from './components/PillButton'
 import { RSVPSection } from './components/RSVPForm'
 import beskid from './assets/beskid.png'
 import bouquet from './assets/bouquet.png'
@@ -88,13 +89,13 @@ function App() {
               <img src={church} alt="The wooden church in Jurków" width="508" height="619" loading="lazy" />
               <h3 className="script-title">Ceremony</h3>
               <p>The ceremony will take place at 3:00 pm at the Church of Our Lady of Perpetual Help in Jurków, Poland.</p>
-              <a className="outline-link" href={wedding.ceremony.mapUrl} target="_blank" rel="noreferrer">See details</a>
+              <PillButton href={wedding.ceremony.mapUrl} target="_blank" rel="noreferrer">See details</PillButton>
             </article>
             <article className="venue-card">
               <img src={celebration} alt="The celebration venue in Słopnice" width="508" height="619" loading="lazy" />
               <h3 className="script-title">Celebration</h3>
               <p>The party will take place at Szałas Beskida in Słopnice, Poland, with plenty of food, drinks and dancing until 5:00 am.</p>
-              <a className="outline-link" href={wedding.celebration.mapUrl} target="_blank" rel="noreferrer">See details</a>
+              <PillButton href={wedding.celebration.mapUrl} target="_blank" rel="noreferrer">See details</PillButton>
             </article>
           </div>
         </section>

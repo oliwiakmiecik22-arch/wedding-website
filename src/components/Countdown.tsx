@@ -54,9 +54,7 @@ export function Countdown() {
         {values.map((item, index) => (
           <Fragment key={item.label}>
             <div className="countdown__unit">
-              <div className="countdown__number-row">
-                <span className="countdown__number">{item.value}</span>
-              </div>
+              <span className="countdown__number">{item.value}</span>
               <span className="countdown__label">{item.label}</span>
             </div>
             {index < values.length - 1 && <span className="countdown__separator">:</span>}

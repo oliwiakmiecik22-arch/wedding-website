@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useId, useRef, useState } from 'react'
 import monogram from '../assets/monogram.png'
 import rsvpEnvelope from '../assets/rsvp-envelope.png'
 import { wedding } from '../config/wedding'
+import { PillButton } from './PillButton'
 
 type Choice = '' | 'yes' | 'no'
 type FormStep = 0 | 1 | 2 | 3
@@ -221,7 +222,7 @@ export function RSVPSection() {
       <h2 className="sr-only" id="rsvp-heading">RSVP</h2>
       <div className="rsvp-envelope-wrap">
         <img src={rsvpEnvelope} alt="RSVP card in an olive green envelope" />
-        <button ref={openButtonRef} className="rsvp-envelope-button" type="button" onClick={openForm} aria-label="Open RSVP form">RSVP</button>
+        <PillButton buttonRef={openButtonRef} className="rsvp-envelope-button" onClick={openForm} ariaLabel="Open RSVP form">RSVP</PillButton>
       </div>
 
       {open && (

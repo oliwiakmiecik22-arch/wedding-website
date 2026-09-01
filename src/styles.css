@@ -412,16 +412,16 @@ figure {
 
 .hero__monogram {
   position: absolute;
-  top: 7.5%;
+  top: 6.5%;
   left: 50%;
-  width: 88px;
+  width: clamp(140px, 9vw, 160px);
   transform: translateX(-50%);
 }
 
 .hero__content h1 {
   position: absolute;
   right: 1rem;
-  bottom: 8.8%;
+  bottom: 11.5%;
   left: 1rem;
   font-family: var(--font-display);
   font-size: 48px;
@@ -433,7 +433,7 @@ figure {
 .hero__content p {
   position: absolute;
   right: 1rem;
-  bottom: 5.25%;
+  bottom: 4.8%;
   left: 1rem;
   font-family: var(--font-countdown);
   font-size: 30px;
@@ -531,20 +531,23 @@ figure {
 }
 
 .countdown__values {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(18px, 1.7vw, 28px);
 }
 
 .countdown__unit {
+  display: flex;
   min-width: 0;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
 .countdown__number-row {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: contents;
 }
 
 .countdown__number {
@@ -556,11 +559,12 @@ figure {
 }
 
 .countdown__separator {
-  position: absolute;
-  right: -0.07em;
+  position: static;
+  flex: 0 0 auto;
   font-size: 118px;
   font-weight: 400;
   line-height: 1;
+  text-align: center;
 }
 
 .countdown__label {
@@ -600,32 +604,7 @@ figure {
   position: absolute;
   top: 53.5%;
   left: 49%;
-  width: 19.8%;
-  height: 4.8%;
-  padding: 0;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  background: transparent;
-  color: transparent;
-  cursor: pointer;
   transform: translate(-50%, -50%);
-  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
-}
-
-.rsvp-envelope-button:hover {
-  border-color: rgba(82, 82, 59, 0.24);
-  background: rgba(82, 82, 59, 0.08);
-  box-shadow: 0 6px 16px rgba(45, 45, 31, 0.14);
-  transform: translate(-50%, -50%) scale(1.025);
-}
-
-.rsvp-envelope-button:active {
-  box-shadow: 0 2px 8px rgba(45, 45, 31, 0.12);
-  transform: translate(-50%, -50%) scale(0.99);
-}
-
-.rsvp-envelope-button:focus-visible {
-  outline-color: var(--ink);
 }
 
 /* Venue */
@@ -679,29 +658,90 @@ figure {
   line-height: 1.5;
 }
 
-.outline-link {
+.pill-button {
   display: inline-flex;
-  min-width: 150px;
-  min-height: 42px;
+  width: 188px;
+  height: 44px;
   align-items: center;
   justify-content: center;
-  margin-top: 24px;
-  padding: 7px 22px;
-  border: 2px solid currentColor;
+  padding: 0 22px;
+  border: 1px solid rgba(17, 17, 15, 0.88);
   border-radius: 999px;
+  background: linear-gradient(180deg, #f5f1e8 0%, #ece5d8 100%);
   color: var(--ink);
+  cursor: pointer;
   font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  box-shadow: 0 3px 10px rgba(45, 45, 31, 0.06);
   text-decoration: none;
   text-transform: uppercase;
-  transition: background 180ms ease, color 180ms ease;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.outline-link:hover {
-  background: var(--ink);
-  color: white;
+.venue-card .pill-button {
+  margin-top: 24px;
+}
+
+.pill-button:hover {
+  border-color: var(--olive-dark);
+  background: var(--olive-dark);
+  color: #fff;
+  box-shadow: 0 7px 16px rgba(45, 45, 31, 0.14);
+}
+
+.pill-button:active {
+  box-shadow: 0 2px 6px rgba(45, 45, 31, 0.12);
+}
+
+.pill-button:focus-visible {
+  outline-color: var(--olive-dark);
+}
+
+/* The RSVP control is already drawn into the envelope artwork.
+   Keep the interactive layer aligned with that printed oval. */
+.pill-button.rsvp-envelope-button {
+  width: 19.8%;
+  height: 4.8%;
+  padding: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+  color: transparent;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(8px, 1.45vw, 20px);
+  font-weight: 400;
+  letter-spacing: 0;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.pill-button.rsvp-envelope-button:hover {
+  border-color: var(--olive-dark);
+  background: var(--olive-dark);
+  box-shadow: 0 7px 16px rgba(45, 45, 31, 0.14);
+  color: #fff;
+}
+
+.pill-button.rsvp-envelope-button:active {
+  border-color: var(--olive-dark);
+  background: var(--olive-dark);
+  box-shadow: 0 2px 6px rgba(45, 45, 31, 0.12);
+  color: #fff;
+}
+
+.pill-button.rsvp-envelope-button:focus-visible {
+  outline: 2px solid var(--olive-dark);
+  outline-offset: 3px;
 }
 
 /* Other details */
@@ -753,20 +793,20 @@ figure {
 
 .accordion {
   position: absolute;
-  top: 27%;
+  top: 23%;
   left: 50%;
-  width: min(100%, 1100px);
+  width: min(76vw, 920px);
   overflow: hidden;
-  border: 1px solid rgba(49, 52, 47, 0.14);
-  border-radius: 12px;
-  background: rgba(248, 248, 247, 0.88);
-  box-shadow: 0 16px 46px rgba(32, 34, 29, 0.09);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(49, 52, 47, 0.13);
+  border-radius: 18px;
+  background: rgba(250, 249, 246, 0.86);
+  box-shadow: 0 20px 54px rgba(32, 34, 29, 0.13);
+  backdrop-filter: blur(16px) saturate(0.82);
   transform: translateX(-50%);
 }
 
 .accordion__item + .accordion__item {
-  border-top: 1px solid rgba(49, 52, 47, 0.17);
+  border-top: 1px solid rgba(49, 52, 47, 0.12);
 }
 
 .accordion__item h3 {
@@ -776,34 +816,34 @@ figure {
 .accordion__item button {
   display: flex;
   width: 100%;
-  min-height: 88px;
+  min-height: 64px;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  padding: 16px 24px;
+  gap: 16px;
+  padding: 13px 20px;
   border: 0;
   background: transparent;
   color: #30312f;
   cursor: pointer;
   font-family: var(--font-body);
-  font-size: 36px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 400;
   letter-spacing: 0;
-  line-height: 1.1;
+  line-height: 1.2;
   text-align: left;
   transition: background 220ms ease, color 220ms ease;
 }
 
 .accordion__item button:hover {
-  background: rgba(255, 255, 255, 0.48);
+  background: rgba(255, 255, 255, 0.68);
 }
 
 .accordion__chevron {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   flex: 0 0 auto;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
   transform: rotate(45deg) translateY(-3px);
   transition: transform 280ms cubic-bezier(0.22, 0.8, 0.28, 1);
 }
@@ -829,12 +869,12 @@ figure {
 }
 
 .accordion__panel p {
-  max-width: 980px;
-  padding: 0 24px 24px;
+  max-width: 860px;
+  padding: 2px 20px 20px;
   font-family: var(--font-body);
-  font-size: 24px;
+  font-size: 17.5px;
   letter-spacing: -0.01em;
-  line-height: 1.45;
+  line-height: 1.55;
 }
 
 .other__polaroid {
@@ -843,7 +883,7 @@ figure {
   right: max(6vw, calc((100vw - 1200px) / 2));
   bottom: -3.5%;
   display: block;
-  width: clamp(300px, 20vw, 360px);
+  width: clamp(330px, 27vw, 470px);
   height: auto;
   aspect-ratio: 571 / 628;
   object-fit: contain;
@@ -1600,18 +1640,16 @@ figure {
     width: min(calc(100vw - 64px), 1000px);
   }
 
+  .accordion {
+    width: min(calc(100vw - 64px), 800px);
+  }
+
   .accordion__item button {
-    font-size: 30px;
+    font-size: 20px;
   }
 }
 
 @media (max-width: 700px) {
-  :root {
-    --mobile-gutter: 24px;
-    --mobile-content: 450px;
-    --mobile-section-space: 72px;
-  }
-
   body {
     font-size: 16px;
   }
@@ -1634,8 +1672,7 @@ figure {
 
   .hero {
     aspect-ratio: auto;
-    height: clamp(560px, 74svh, 720px);
-    min-height: 0;
+    min-height: 74svh;
   }
 
   .hero__image {
@@ -1643,174 +1680,138 @@ figure {
   }
 
   .hero__monogram {
-    width: 62px;
+    top: 5.5%;
+    width: 104px;
   }
 
   .hero__content h1 {
-    right: var(--mobile-gutter);
-    bottom: 10.5%;
-    left: var(--mobile-gutter);
-    font-size: clamp(31px, 8.8vw, 38px);
+    bottom: 12.8%;
+    font-size: 34px;
   }
 
   .hero__content p {
-    right: var(--mobile-gutter);
-    bottom: 6.25%;
-    left: var(--mobile-gutter);
-    font-size: clamp(19px, 5.4vw, 23px);
+    bottom: 4.8%;
+    font-size: 22px;
   }
 
   .invitation {
     min-height: auto;
-    padding: var(--mobile-section-space) 0;
+    padding: 78px 0 86px;
   }
 
   .invitation__inner {
-    width: min(calc(100vw - 48px), var(--mobile-content));
+    width: min(calc(100vw - 48px), 470px);
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 50px;
   }
 
   .invitation__polaroid {
-    width: min(78%, 300px);
+    width: min(78vw, 340px);
     justify-self: center;
   }
 
   .invitation__copy h2 {
-    margin-bottom: 20px;
-    font-size: clamp(52px, 14.5vw, 62px);
+    margin-bottom: 28px;
+    font-size: 66px;
   }
 
   .invitation__copy p {
-    margin-bottom: 18px;
-    font-size: 18px;
-    line-height: 1.48;
-  }
-
-  .invitation__copy .invitation__date {
-    margin-bottom: 18px;
+    margin-bottom: 28px;
+    font-size: 20px;
+    line-height: 1.5;
   }
 
   .countdown-section {
-    min-height: 310px;
-  }
-
-  .countdown-section__background {
-    object-position: center 78%;
+    min-height: 350px;
   }
 
   .countdown {
-    width: min(calc(100vw - 48px), 540px);
+    width: calc(100vw - 20px);
+  }
+
+  .countdown__values {
+    gap: clamp(4px, 1.6vw, 8px);
   }
 
   .countdown__number {
-    font-size: clamp(32px, 11.5vw, 54px);
+    font-size: clamp(36px, 11vw, 52px);
   }
 
   .countdown__separator {
-    right: -0.02em;
-    font-size: clamp(29px, 10vw, 48px);
+    font-size: clamp(30px, 9.5vw, 45px);
   }
 
   .countdown__label {
     margin-top: 9px;
-    font-size: clamp(11px, 3.25vw, 15px);
+    font-size: clamp(12px, 3.4vw, 16px);
   }
 
   .rsvp-section {
-    min-height: auto;
-    padding: 52px 0 58px;
+    min-height: 580px;
+    padding: 60px 0;
   }
 
   .rsvp-envelope-wrap {
-    width: min(calc(100vw + 32px), 580px);
+    width: min(96vw, 550px);
   }
 
   .venue {
     min-height: auto;
-    padding: 76px 0 88px;
+    padding: 90px 0 110px;
   }
 
-  .venue > h2 {
-    margin-bottom: 42px;
-    font-size: clamp(55px, 15vw, 66px);
+  .venue > h2,
+  .other__content > h2 {
+    margin-bottom: 55px;
+    font-size: 68px;
     line-height: 1;
   }
 
   .venue__grid {
-    width: min(calc(100vw - 48px), var(--mobile-content));
+    width: min(calc(100vw - 48px), 450px);
     grid-template-columns: 1fr;
-    gap: 64px;
-  }
-
-  .venue-card img {
-    width: min(88%, 320px);
-    height: auto;
-    aspect-ratio: auto;
-    object-fit: contain;
+    gap: 80px;
   }
 
   .venue-card h3 {
-    margin-top: 22px;
-    font-size: 48px;
+    font-size: 52px;
   }
 
   .venue-card p {
     min-height: 0;
-    margin-top: 12px;
     font-size: 18px;
-    line-height: 1.48;
-  }
-
-  .venue-card .outline-link {
-    margin-top: 20px;
   }
 
   .other {
     min-height: 0;
-    aspect-ratio: auto;
-    overflow: hidden;
+    aspect-ratio: 1600 / 1718;
   }
 
   .other__background {
     object-position: 51% center;
   }
 
-  .other::after {
-    background: linear-gradient(180deg, rgba(244, 244, 243, 0.9) 0%, rgba(244, 244, 243, 0.5) 24%, rgba(244, 244, 243, 0.08) 62%, rgba(244, 244, 243, 0.34) 100%);
-  }
-
   .other__content {
-    position: relative;
-    inset: auto;
-    width: min(calc(100vw - 48px), var(--mobile-content));
-    padding: var(--mobile-section-space) 0 260px;
+    width: calc(100vw - 28px);
+    padding-top: 0;
   }
 
   .other__content > h2 {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: auto;
-    margin-bottom: 38px;
-    font-size: clamp(52px, 14.5vw, 62px);
+    top: 7.5%;
+    margin-bottom: 0;
+    font-size: 54px;
     line-height: 1;
   }
 
   .accordion {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 100%;
-    transform: none;
+    top: 23%;
+    width: min(calc(100vw - 28px), 420px);
   }
 
   .accordion__item button {
-    min-height: 62px;
-    gap: 16px;
-    padding: 13px 16px;
-    font-size: 19px;
-    line-height: 1.25;
+    min-height: 60px;
+    padding: 12px 16px;
+    font-size: 20px;
   }
 
   .accordion__panel {
@@ -1818,33 +1819,25 @@ figure {
   }
 
   .accordion__panel p {
-    padding: 2px 16px 20px;
+    padding: 2px 16px 18px;
     font-size: 17px;
-    line-height: 1.52;
+    line-height: 1.5;
   }
 
   .other__polaroid {
-    right: var(--mobile-gutter);
-    bottom: 34px;
-    width: min(49vw, 210px);
+    right: 4%;
+    bottom: -7%;
+    width: min(70vw, 260px);
     height: auto;
   }
 
   .closing-message {
-    min-height: auto;
-    padding: 92px var(--mobile-gutter) 78px;
+    min-height: 460px;
+    padding: 150px 20px 80px;
   }
 
   .closing-message p {
-    max-width: var(--mobile-content);
-    font-size: clamp(46px, 13.5vw, 60px);
-    line-height: 1.06;
-  }
-
-  .closing-landscape img {
-    min-height: 180px;
-    object-fit: cover;
-    object-position: center;
+    font-size: clamp(54px, 17vw, 72px);
   }
 
   .dialog-backdrop {

@@ -4,7 +4,7 @@ const details = [
   {
     id: 'accommodation',
     title: 'Accommodation',
-    body: 'Accommodation for the night of the wedding will be provided for our guests. If you would like to stay for any additional nights, please let us know in your RSVP.',
+    body: 'We truly appreciate you travelling so far to celebrate with us, so accommodation will be provided for the night of the wedding. If you would like to arrive earlier or extend your stay, we would be very happy to help arrange additional nights, which can be booked separately at your own expense.',
   },
   {
     id: 'following-day',
@@ -14,17 +14,22 @@ const details = [
   {
     id: 'transport',
     title: 'Transport',
-    body: 'A coach from Kraków will be available on the morning of the wedding, with return transport after the second-day celebration. Please reserve the seats you need in your RSVP.',
+    body: 'A coach from Kraków will be organised on the morning of the wedding for anyone who would like to use it. Return transport to Kraków will also be provided on the evening of the second day. If you prefer to travel independently, the venue has a free car park. There is plenty to explore in the surrounding area, so hiring a car is a great option if you would like to do some sightseeing during your stay.',
   },
   {
     id: 'airport',
     title: 'Closest airport',
-    body: 'The closest airport is Kraków John Paul II International Airport. Further travel information will be shared with guests who request transport.',
+    body: 'The nearest airport is Kraków John Paul II International Airport (KRK), approximately a 1½-hour drive from the venue. The airport is well connected to Kraków city centre by train, bus and taxi. Guests staying in Kraków can also use the coach provided on the morning of the wedding.',
   },
   {
     id: 'dress-code',
     title: 'Dress-code',
-    body: 'Please choose elegant attire that will also feel comfortable in the mountain surroundings. We recommend bringing a light layer for the evening.',
+    body: 'The dress code is formal attire. All colours are welcome; however, we kindly ask guests to avoid white, ivory, cream, pale yellow and other very light shades that may appear white.',
+  },
+  {
+    id: 'gifts',
+    title: 'Gifts',
+    body: 'Your presence is the greatest gift of all. If you would like to give a wedding gift, we would be very grateful for a contribution toward our future together.',
   },
 ] as const
 
