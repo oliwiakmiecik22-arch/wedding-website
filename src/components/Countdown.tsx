@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
 import { wedding } from '../config/wedding'
 
 interface TimeLeft {
@@ -52,13 +52,15 @@ export function Countdown() {
       </p>
       <div className="countdown__values" aria-hidden="true">
         {values.map((item, index) => (
-          <div className="countdown__unit" key={item.label}>
-            <div className="countdown__number-row">
-              <span className="countdown__number">{item.value}</span>
-              {index < values.length - 1 && <span className="countdown__separator">:</span>}
+          <Fragment key={item.label}>
+            <div className="countdown__unit">
+              <div className="countdown__number-row">
+                <span className="countdown__number">{item.value}</span>
+              </div>
+              <span className="countdown__label">{item.label}</span>
             </div>
-            <span className="countdown__label">{item.label}</span>
-          </div>
+            {index < values.length - 1 && <span className="countdown__separator">:</span>}
+          </Fragment>
         ))}
       </div>
     </div>

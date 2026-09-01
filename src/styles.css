@@ -843,7 +843,7 @@ figure {
   right: max(6vw, calc((100vw - 1200px) / 2));
   bottom: -3.5%;
   display: block;
-   width: clamp(330px, 27vw, 470px);
+  width: clamp(300px, 20vw, 360px);
   height: auto;
   aspect-ratio: 571 / 628;
   object-fit: contain;
@@ -1606,6 +1606,12 @@ figure {
 }
 
 @media (max-width: 700px) {
+  :root {
+    --mobile-gutter: 24px;
+    --mobile-content: 450px;
+    --mobile-section-space: 72px;
+  }
+
   body {
     font-size: 16px;
   }
@@ -1628,7 +1634,8 @@ figure {
 
   .hero {
     aspect-ratio: auto;
-    min-height: 74svh;
+    height: clamp(560px, 74svh, 720px);
+    min-height: 0;
   }
 
   .hero__image {
@@ -1640,128 +1647,170 @@ figure {
   }
 
   .hero__content h1 {
-    bottom: 9.5%;
-    font-size: 34px;
+    right: var(--mobile-gutter);
+    bottom: 10.5%;
+    left: var(--mobile-gutter);
+    font-size: clamp(31px, 8.8vw, 38px);
   }
 
   .hero__content p {
-    bottom: 5.5%;
-    font-size: 22px;
+    right: var(--mobile-gutter);
+    bottom: 6.25%;
+    left: var(--mobile-gutter);
+    font-size: clamp(19px, 5.4vw, 23px);
   }
 
   .invitation {
     min-height: auto;
-    padding: 78px 0 86px;
+    padding: var(--mobile-section-space) 0;
   }
 
   .invitation__inner {
-    width: min(calc(100vw - 48px), 470px);
+    width: min(calc(100vw - 48px), var(--mobile-content));
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 28px;
   }
 
   .invitation__polaroid {
-    width: min(78vw, 340px);
+    width: min(78%, 300px);
     justify-self: center;
   }
 
   .invitation__copy h2 {
-    margin-bottom: 28px;
-    font-size: 66px;
+    margin-bottom: 20px;
+    font-size: clamp(52px, 14.5vw, 62px);
   }
 
   .invitation__copy p {
-    margin-bottom: 28px;
-    font-size: 20px;
-    line-height: 1.5;
+    margin-bottom: 18px;
+    font-size: 18px;
+    line-height: 1.48;
+  }
+
+  .invitation__copy .invitation__date {
+    margin-bottom: 18px;
   }
 
   .countdown-section {
-    min-height: 350px;
+    min-height: 310px;
+  }
+
+  .countdown-section__background {
+    object-position: center 78%;
   }
 
   .countdown {
-    width: calc(100vw - 20px);
+    width: min(calc(100vw - 48px), 540px);
   }
 
   .countdown__number {
-    font-size: clamp(44px, 14vw, 66px);
+    font-size: clamp(32px, 11.5vw, 54px);
   }
 
   .countdown__separator {
-    font-size: clamp(40px, 12vw, 58px);
+    right: -0.02em;
+    font-size: clamp(29px, 10vw, 48px);
   }
 
   .countdown__label {
-    margin-top: 10px;
-    font-size: clamp(14px, 4vw, 19px);
+    margin-top: 9px;
+    font-size: clamp(11px, 3.25vw, 15px);
   }
 
   .rsvp-section {
-    min-height: 580px;
-    padding: 60px 0;
+    min-height: auto;
+    padding: 52px 0 58px;
   }
 
   .rsvp-envelope-wrap {
-    width: min(96vw, 550px);
+    width: min(calc(100vw + 32px), 580px);
   }
 
   .venue {
     min-height: auto;
-    padding: 90px 0 110px;
+    padding: 76px 0 88px;
   }
 
-  .venue > h2,
-  .other__content > h2 {
-    margin-bottom: 55px;
-    font-size: 68px;
+  .venue > h2 {
+    margin-bottom: 42px;
+    font-size: clamp(55px, 15vw, 66px);
     line-height: 1;
   }
 
   .venue__grid {
-    width: min(calc(100vw - 48px), 450px);
+    width: min(calc(100vw - 48px), var(--mobile-content));
     grid-template-columns: 1fr;
-    gap: 80px;
+    gap: 64px;
+  }
+
+  .venue-card img {
+    width: min(88%, 320px);
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
   }
 
   .venue-card h3 {
-    font-size: 52px;
+    margin-top: 22px;
+    font-size: 48px;
   }
 
   .venue-card p {
     min-height: 0;
+    margin-top: 12px;
     font-size: 18px;
+    line-height: 1.48;
+  }
+
+  .venue-card .outline-link {
+    margin-top: 20px;
   }
 
   .other {
     min-height: 0;
-    aspect-ratio: 1600 / 1718;
+    aspect-ratio: auto;
+    overflow: hidden;
   }
 
   .other__background {
     object-position: 51% center;
   }
 
+  .other::after {
+    background: linear-gradient(180deg, rgba(244, 244, 243, 0.9) 0%, rgba(244, 244, 243, 0.5) 24%, rgba(244, 244, 243, 0.08) 62%, rgba(244, 244, 243, 0.34) 100%);
+  }
+
   .other__content {
-    width: calc(100vw - 28px);
-    padding-top: 0;
+    position: relative;
+    inset: auto;
+    width: min(calc(100vw - 48px), var(--mobile-content));
+    padding: var(--mobile-section-space) 0 260px;
   }
 
   .other__content > h2 {
-    top: 7.5%;
-    margin-bottom: 0;
-    font-size: 54px;
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    margin-bottom: 38px;
+    font-size: clamp(52px, 14.5vw, 62px);
     line-height: 1;
   }
 
   .accordion {
-    top: 24%;
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    transform: none;
   }
 
   .accordion__item button {
-    min-height: 58px;
-    padding: 11px 14px;
-    font-size: 21px;
+    min-height: 62px;
+    gap: 16px;
+    padding: 13px 16px;
+    font-size: 19px;
+    line-height: 1.25;
   }
 
   .accordion__panel {
@@ -1769,24 +1818,33 @@ figure {
   }
 
   .accordion__panel p {
-    padding: 0 14px 16px;
-    font-size: 16px;
+    padding: 2px 16px 20px;
+    font-size: 17px;
+    line-height: 1.52;
   }
 
   .other__polaroid {
-    right: 4%;
-    bottom: -7%;
-   width: min(70vw, 260px);
+    right: var(--mobile-gutter);
+    bottom: 34px;
+    width: min(49vw, 210px);
     height: auto;
   }
 
   .closing-message {
-    min-height: 460px;
-    padding: 150px 20px 80px;
+    min-height: auto;
+    padding: 92px var(--mobile-gutter) 78px;
   }
 
   .closing-message p {
-    font-size: clamp(54px, 17vw, 72px);
+    max-width: var(--mobile-content);
+    font-size: clamp(46px, 13.5vw, 60px);
+    line-height: 1.06;
+  }
+
+  .closing-landscape img {
+    min-height: 180px;
+    object-fit: cover;
+    object-position: center;
   }
 
   .dialog-backdrop {
