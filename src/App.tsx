@@ -94,7 +94,7 @@ function App() {
             <article className="venue-card">
               <img src={celebration} alt="The celebration venue in Słopnice" width="1016" height="1238" loading="lazy" />
               <h3 className="script-title">Celebration</h3>
-              <p>The party will take place at Szałas Beskida in Słopnice, Poland, with plenty of food, drinks and dancing until 5:00 am.</p>
+              <p>The party will take place at Serce Beskidu in Słopnice, Poland, with plenty of food, drinks and dancing until 5:00 am.</p>
               <PillButton href={wedding.celebration.mapUrl} target="_blank" rel="noreferrer">See details</PillButton>
             </article>
           </div>
