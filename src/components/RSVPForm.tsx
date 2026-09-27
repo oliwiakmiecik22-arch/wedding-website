@@ -13,10 +13,7 @@ interface FormValues {
   guestCount: string
   attendeeNames: string
   dietaryRequirements: string
-  accommodation: Choice
   additionalNights: Choice
-  checkInDate: string
-  checkOutDate: string
   followingDay: Choice
   coachFromKrakow: Choice
   coachSeats: string
@@ -27,7 +24,7 @@ interface FormValues {
 
 const initialValues: FormValues = {
   leadGuestName: '', attendance: '', guestCount: '1', attendeeNames: '', dietaryRequirements: '',
-  accommodation: '', additionalNights: '', checkInDate: '', checkOutDate: '', followingDay: '',
+  additionalNights: '', followingDay: '',
   coachFromKrakow: '', coachSeats: '', returnTransport: '', danceFloorSong: '', website: '',
 }
 
@@ -49,15 +46,7 @@ const validateStep = (values: FormValues, step: FormStep): FormErrors => {
     if (values.attendeeNames.trim().length < 2) errors.attendeeNames = 'Please list everyone attending.'
   }
   if (values.attendance === 'yes' && step === 2) {
-    if (!values.accommodation) errors.accommodation = 'Please select an accommodation option.'
     if (!values.additionalNights) errors.additionalNights = 'Please select an option.'
-    if (values.additionalNights === 'yes') {
-      if (!values.checkInDate) errors.checkInDate = 'Please select a check-in date.'
-      if (!values.checkOutDate) errors.checkOutDate = 'Please select a check-out date.'
-      if (values.checkInDate && values.checkOutDate && values.checkOutDate <= values.checkInDate) {
-        errors.checkOutDate = 'Check-out must be after check-in.'
-      }
-    }
     if (!values.followingDay) errors.followingDay = 'Please select an option.'
     if (!values.coachFromKrakow) errors.coachFromKrakow = 'Please select an option.'
     if (values.coachFromKrakow === 'yes') {
@@ -159,11 +148,10 @@ export function RSVPSection() {
     setValues((current) => {
       const next = { ...current, [name]: value }
       if (name === 'attendance' && value === 'no') {
-        return { ...next, guestCount: '0', attendeeNames: '', dietaryRequirements: '', accommodation: '', additionalNights: '', checkInDate: '', checkOutDate: '', followingDay: '', coachFromKrakow: '', coachSeats: '', returnTransport: '' }
+        return { ...next, guestCount: '0', attendeeNames: '', dietaryRequirements: '', additionalNights: '', followingDay: '', coachFromKrakow: '', coachSeats: '', returnTransport: '' }
       }
       if (name === 'attendance' && value === 'yes' && current.guestCount === '0') next.guestCount = '1'
       if (name === 'coachFromKrakow' && value === 'no') next.coachSeats = ''
-      if (name === 'additionalNights' && value === 'no') { next.checkInDate = ''; next.checkOutDate = '' }
       return next
     })
     setErrors((current) => ({ ...current, [name]: undefined }))
@@ -206,7 +194,16 @@ export function RSVPSection() {
     const endpoint = import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL?.trim()
     if (!endpoint) { setStatus('error'); setStatusMessage('RSVP is not connected yet. Please contact Kasia or Jake directly.'); return }
     setStatus('submitting'); setStatusMessage('Sending your reply…')
-    const payload = { ...values, submissionId: crypto.randomUUID(), submittedAtClient: new Date().toISOString(), rsvpDeadline: wedding.rsvpDeadline }
+    const payload = {
+      ...values,
+      // Keep these fixed values for compatibility with the existing Google Sheets script.
+      accommodation: 'yes',
+      checkInDate: '2027-06-19',
+      checkOutDate: values.additionalNights === 'yes' ? '2027-06-21' : '2027-06-20',
+      submissionId: crypto.randomUUID(),
+      submittedAtClient: new Date().toISOString(),
+      rsvpDeadline: wedding.rsvpDeadline,
+    }
     try {
       await fetch(endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) })
       setStatus('success'); setStatusMessage('Thank you - your RSVP has been sent.')
@@ -265,9 +262,16 @@ export function RSVPSection() {
                     {step === 2 && (
                       <><div className="form-step__intro"><p className="form-step__number">03</p><div><h3 ref={stepHeadingRef} tabIndex={-1} id="rsvp-step-2">Stay &amp; travel</h3><p>A few practical details to help us arrange your weekend.</p></div></div>
                         <div className="form-subsection"><h4>Accommodation</h4>
-                          <ChoiceField legend="Will you require accommodation for the night of the wedding?" name="accommodation" value={values.accommodation} onChange={updateValue} error={errors.accommodation} />
-                          <ChoiceField legend="Would you like us to arrange any additional nights?" name="additionalNights" value={values.additionalNights} onChange={updateValue} error={errors.additionalNights} hint="Accommodation for the wedding night is provided. Additional nights can be arranged separately at your own expense." />
-                          {values.additionalNights === 'yes' && <div className="date-grid"><div className="form-field"><label htmlFor="checkInDate">Preferred check-in date</label><input id="checkInDate" type="date" value={values.checkInDate} onChange={(event) => updateValue('checkInDate', event.target.value)} aria-invalid={Boolean(errors.checkInDate)} />{errors.checkInDate && <span className="field-error">{errors.checkInDate}</span>}</div><div className="form-field"><label htmlFor="checkOutDate">Preferred check-out date</label><input id="checkOutDate" type="date" value={values.checkOutDate} onChange={(event) => updateValue('checkOutDate', event.target.value)} aria-invalid={Boolean(errors.checkOutDate)} />{errors.checkOutDate && <span className="field-error">{errors.checkOutDate}</span>}</div></div>}
+                          <ChoiceField
+                            legend="Would you like for us to arrange an additional night?"
+                            name="additionalNights"
+                            value={values.additionalNights}
+                            onChange={updateValue}
+                            error={errors.additionalNights}
+                            hint="Accommodation for the night of the wedding is provided. An additional night can be arranged separately at your own expense."
+                            yesLabel="Yes (Check-out Monday 21st)"
+                            noLabel="No (Check-out Sunday 20th)"
+                          />
                         </div>
                         <div className="form-subsection"><h4>The Following Day</h4><ChoiceField legend="Will you be joining us for the second-day celebration?" name="followingDay" value={values.followingDay} onChange={updateValue} error={errors.followingDay} /></div>
                         <div className="form-subsection"><h4>Transport</h4><ChoiceField legend="Would you like to use the coach from Kraków on the morning of the wedding?" name="coachFromKrakow" value={values.coachFromKrakow} onChange={updateValue} error={errors.coachFromKrakow} />
