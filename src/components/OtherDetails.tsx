@@ -14,7 +14,7 @@ const details = [
   {
     id: 'transport',
     title: 'Transport',
-    body: 'A coach will be organised from Kraków to Serce Beskidu on the morning of the wedding for anyone who would like to use it, leaving plenty of time to check in and get ready. It will then take you to the church for the 3pm ceremony and back to the venue afterwards. Return transport to Kraków will then be provided on the evening of the following day, or on Monday morning for those who have booked an additional night. If you prefer to travel independently or hire a car instead, both the church and the venue have free parking.',
+    body: 'A coach will be organised from Kraków to Serce Beskidu on the morning of the wedding for anyone that would like to use it, leaving plenty of time to check in and get ready. It will then take you to the church for the 3pm ceremony and back to the venue afterwards. Return transport to Kraków will then be provided on the evening of the following day, or on Monday morning for those that have booked an additional night. If you prefer to travel independently and/or hire a car instead, both the church and the venue have free parking.',
   },
   {
     id: 'airport',
