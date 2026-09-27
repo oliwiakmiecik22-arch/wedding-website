@@ -4,7 +4,7 @@ const details = [
   {
     id: 'accommodation',
     title: 'Accommodation',
-    body: 'We truly appreciate you travelling so far to celebrate with us, so accommodation will be provided for the night of the wedding. If you would like to arrive earlier or extend your stay, we would be very happy to help arrange additional nights, which can be booked separately at your own expense.',
+    body: 'We truly appreciate you travelling so far to celebrate with us, so accommodation will be provided at Serce Beskidu for the night of the wedding. If you would like to extend your stay there for an additional night, we would be very happy to help arrange this, which can be booked separately at your own expense.',
   },
   {
     id: 'following-day',
@@ -14,7 +14,7 @@ const details = [
   {
     id: 'transport',
     title: 'Transport',
-    body: 'A coach from Kraków will be organised on the morning of the wedding for anyone who would like to use it. Return transport to Kraków will also be provided on the evening of the second day. If you prefer to travel independently, the venue has a free car park. There is plenty to explore in the surrounding area, so hiring a car is a great option if you would like to do some sightseeing during your stay.',
+    body: 'A coach will be organised from Kraków to Serce Beskidu on the morning of the wedding for anyone who would like to use it, leaving plenty of time to check in and get ready. It will then take you to the church for the 3pm ceremony and back to the venue afterwards. Return transport to Kraków will then be provided on the evening of the following day, or on Monday morning for those who have booked an additional night. If you prefer to travel independently or hire a car instead, both the church and the venue have free parking.',
   },
   {
     id: 'airport',
