@@ -1412,13 +1412,38 @@ figure {
 }
 
 .form-field--choice {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-inline-size: 0;
   margin-top: 30px;
   padding: 0;
   border: 0;
 }
 
+.form-field--choice > legend {
+  display: block;
+  float: left;
+  width: 100%;
+  max-width: none;
+  margin: 0 0 8px;
+  padding: 0;
+  white-space: normal;
+  word-break: normal;
+}
+
+.form-field--choice > .field-hint {
+  display: block;
+  clear: both;
+  width: 100%;
+  max-width: 760px;
+  margin-bottom: 8px;
+}
+
 .choice-row {
   display: grid;
+  clear: both;
+  width: 100%;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin-top: 4px;
